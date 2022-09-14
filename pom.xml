@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.lqs</groupId>
+    <artifactId>flink-connectors</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>flink-connectors-rabbitmq</module>
+        <module>flink-connectors-common</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <log4j.version>2.18.0</log4j.version>
+        <slf4j.version>1.7.36</slf4j.version>
+        <junit.version>5.9.0</junit.version>
+
+        <spring.boot.version>2.7.3</spring.boot.version>
+
+        <flink.version>1.14.5</flink.version>
+        <flink.scala.version>2.12</flink.scala.version>
+
+        <netty.version>4.1.77.Final</netty.version>
+
+        <fastjson.version>2.0.13</fastjson.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- fastjson2 -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- SpringBoot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- netty -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+
+            <!-- flink-kafka -->
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-connector-kafka_${flink.scala.version}</artifactId>
+                <version>${flink.version}</version>
+            </dependency>
+            <!-- flink-rabbitmq -->
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-connector-rabbitmq_${flink.scala.version}</artifactId>
+                <version>${flink.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- flink-java -->
+        <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-java -->
+        <!--suppress VulnerableLibrariesLocal -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-java</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-streaming-java -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-streaming-java_${flink.scala.version}</artifactId>
+            <version>${flink.version}</version>
+            <!-- <scope>provided</scope> -->
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-runtime-web_${flink.scala.version}</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-clients -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-clients_${flink.scala.version}</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>
