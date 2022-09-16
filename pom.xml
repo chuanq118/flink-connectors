@@ -11,6 +11,7 @@
     <modules>
         <module>flink-connectors-rabbitmq</module>
         <module>flink-connectors-common</module>
+        <module>flink-connectors-kafka</module>
     </modules>
 
     <properties>
@@ -34,6 +35,36 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- log4j2 -->
+            <!-- 使用slf4j 作为日志门面 -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <!-- 使用 log4j2 的适配器进行绑定 -->
+            <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <!-- log4j2 日志实面 -->
+            <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+
             <!-- fastjson2 -->
             <dependency>
                 <groupId>com.alibaba.fastjson2</groupId>
@@ -107,5 +138,7 @@
             <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
+
+
     </dependencies>
 </project>

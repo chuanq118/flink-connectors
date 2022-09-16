@@ -4,20 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
-
 /**
- * the flink source entity.
- * 2022/9/14 18:01
+ * 2022/9/16 10:55
  * created by @lqs
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Source {
+public class FlinkConnectorConfig {
 
-    private String name;
-    private String type;
-    private Map<String, String> props;
+    private Sink sink;
+    private Source source;
+    private String jobName;
 
 }

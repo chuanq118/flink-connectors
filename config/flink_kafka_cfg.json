@@ -1,0 +1,22 @@
+{
+  "source": {
+    "name": "Flink-Source-Kafka",
+    "type": "java.lang.String",
+    "props": {
+      "bootstrap.servers": "kafka00:9092",
+      "group.id": "",
+      "topics": "lqs",
+      "start.offset": "earliest",
+      "value.deserializer": "org.apache.flink.api.common.serialization.SimpleStringSchema",
+      "additional": ""
+    }
+  },
+  "sink": {
+    "name": "Flink-Sink-STDOUT",
+    "type": "",
+    "props": {
+
+    }
+  },
+  "jobName": "flink-kafka_test"
+}
