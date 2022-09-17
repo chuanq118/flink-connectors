@@ -17,6 +17,7 @@ public class Sink {
 
     private String name;
     private String type;
+    private String sinkFunc;
     private Map<String, String> props;
 
 }

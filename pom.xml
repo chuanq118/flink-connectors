@@ -12,6 +12,7 @@
         <module>flink-connectors-rabbitmq</module>
         <module>flink-connectors-common</module>
         <module>flink-connectors-kafka</module>
+        <module>flink-connectors-redis</module>
     </modules>
 
     <properties>

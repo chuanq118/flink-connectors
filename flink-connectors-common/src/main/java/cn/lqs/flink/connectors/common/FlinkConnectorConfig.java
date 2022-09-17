@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * 2022/9/16 10:55
  * created by @lqs
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FlinkConnectorConfig {
 
-    private Sink sink;
+    private List<Sink> sinks;
     private Source source;
     private String jobName;
 

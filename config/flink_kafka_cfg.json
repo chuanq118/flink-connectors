@@ -11,12 +11,14 @@
       "additional": ""
     }
   },
-  "sink": {
-    "name": "Flink-Sink-STDOUT",
-    "type": "",
-    "props": {
+  "sinks": [
+    {
+      "name": "Flink-SinkTo-STDOUT",
+      "type": "STDOUT",
+      "props": {
 
+      }
     }
-  },
+  ],
   "jobName": "flink-kafka_test"
 }

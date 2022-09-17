@@ -1,0 +1,28 @@
+{
+  "source": {
+    "name": "Flink-Source-UUID",
+    "type": "java.lang.String",
+    "props": {
+      "interval": "2000",
+      "max.size": "300"
+    }
+  },
+  "sinks": [
+    {
+      "name": "Flink-SinkTo-STDOUT",
+      "type": "STDOUT",
+      "props": {}
+    },
+    {
+      "name": "Flink-SinkTo-Redis",
+      "type": "redis",
+      "sink.func": "",
+      "props": {
+        "hostname": "",
+        "port": "",
+        "password": ""
+      }
+    }
+  ],
+  "jobName": "flink-redis_test"
+}
