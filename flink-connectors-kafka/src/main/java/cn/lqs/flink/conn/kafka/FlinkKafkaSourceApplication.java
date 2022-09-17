@@ -28,7 +28,8 @@ public class FlinkKafkaSourceApplication {
                 = LqsFlinkKafkaSourceUtil.<String>createSourceOfKfk(args);
 
         // 启动本地测试
-        DataStreamSource<String> ds = LqsLocalFlinkApplication.run(8081, 2)
+        DataStreamSource<String> ds = LqsLocalFlinkApplication.runLocal(8081, 2)
+
                 .fromSource(kafkaSource,
                 WatermarkStrategy.forBoundedOutOfOrderness(Duration.ofSeconds(5)),
                 FlinkConnectorConfigs.getConnectorCfg().getSource().getName(), Types.STRING);

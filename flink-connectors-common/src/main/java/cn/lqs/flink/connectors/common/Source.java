@@ -18,6 +18,8 @@ public class Source {
 
     private String name;
     private String type;
+    private String dataType;
+    private String sourceFunc;
     private Map<String, String> props;
 
 }

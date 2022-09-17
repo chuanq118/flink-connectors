@@ -28,6 +28,7 @@
 
         <flink.version>1.14.5</flink.version>
         <flink.scala.version>2.12</flink.scala.version>
+        <flink.redis.version>1.1.0</flink.redis.version>
 
         <netty.version>4.1.77.Final</netty.version>
 
@@ -100,6 +101,12 @@
                 <groupId>org.apache.flink</groupId>
                 <artifactId>flink-connector-rabbitmq_${flink.scala.version}</artifactId>
                 <version>${flink.version}</version>
+            </dependency>
+            <!-- flink-redis -->
+            <dependency>
+                <groupId>org.apache.bahir</groupId>
+                <artifactId>flink-connector-redis_${flink.scala.version}</artifactId>
+                <version>${flink.redis.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

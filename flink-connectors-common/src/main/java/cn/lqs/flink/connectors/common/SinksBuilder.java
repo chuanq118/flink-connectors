@@ -1,8 +1,11 @@
 package cn.lqs.flink.connectors.common;
 
 
-import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import cn.lqs.flink.connectors.common.config.RedisConfig;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.functions.sink.SinkFunction;
+import org.apache.flink.streaming.connectors.redis.RedisSink;
+import org.apache.flink.streaming.connectors.redis.common.mapper.RedisMapper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -13,7 +16,7 @@ import java.util.List;
  */
 public class SinksBuilder {
 
-    public static <T> void build(List<Sink> sinks, DataStreamSource<T> ds) {
+    public static <T> void build(List<Sink> sinks, SingleOutputStreamOperator<T> ds) {
         sinks.forEach(sink -> {
             SinkFunction<T> func = null;
             if (sink.getSinkFunc() != null && !"".equals(sink.getSinkFunc())) {
@@ -29,7 +32,17 @@ public class SinksBuilder {
                     buildStdoutSink(ds);
                     break;
                 case "redis":
-                    buildRedisSink(ds, func);
+                    RedisConfig.host = sink.getProps().get("hostname");
+                    RedisConfig.password = sink.getProps().get("password");
+                    RedisConfig.port = Integer.parseInt(sink.getProps().get("port"));
+                    try{
+                        buildRedisSink(ds, new RedisSink<>(RedisConfig.redisCfg,
+                                (RedisMapper<T>) Class.forName(sink.getProps().get("mapper"))
+                                        .getDeclaredConstructor().newInstance()));
+                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                             NoSuchMethodException | ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 default:
                     throw new IllegalArgumentException("不支持的 sink 类型 :: " + sink.getType());
@@ -38,7 +51,7 @@ public class SinksBuilder {
         });
     }
 
-    private static <T> void buildStdoutSink(DataStreamSource<T> ds) {
+    private static <T> void buildStdoutSink(SingleOutputStreamOperator<T> ds) {
         try {
             ds.print();
         } catch (Exception e) {
@@ -46,8 +59,9 @@ public class SinksBuilder {
         }
     }
 
-    private static <T> void  buildRedisSink(DataStreamSource<T> dataSource,
+    private static <T> void  buildRedisSink(SingleOutputStreamOperator<T> dataSource,
                                             SinkFunction<T> func){
+
         dataSource.addSink(func);
     }
 

@@ -19,13 +19,46 @@
       "additional": "采用 key = value; (分号为分隔符)"
     }
   },
-  "sink": {
+  "sinks": [{
     "name": "Flink-Sink-STDOUT",
     "type": "",
     "props": {
 
     }
-  },
+  }],
   "jobName": "flink-kafka_test"
+}
+```
+- Flink SinkTo Redis Config
+```json
+{
+  "source": {
+    "name": "Flink-Source-UUID",
+    "dataType": "java.lang.String",
+    "sourceFunc": "cn.lqs.flink.connectors.common.util.UuidSource",
+    "props": {
+      "interval": "2000",
+      "max.size": "300"
+    }
+  },
+  "sinks": [
+    {
+      "name": "Flink-SinkTo-STDOUT",
+      "type": "STDOUT",
+      "props": {}
+    },
+    {
+      "name": "Flink-SinkTo-Redis",
+      "type": "redis",
+      "sinkFunc": "",
+      "props": {
+        "hostname": "localhost",
+        "port": "6379",
+        "password": "",
+        "mapper": "cn.lqs.flink.connectors.common.config.mapper.RedisStringMapper"
+      }
+    }
+  ],
+  "jobName": "flink-redis_test"
 }
 ```

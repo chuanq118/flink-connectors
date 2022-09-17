@@ -16,6 +16,11 @@
             <groupId>com.alibaba.fastjson2</groupId>
             <artifactId>fastjson2</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.bahir</groupId>
+            <artifactId>flink-connector-redis_${flink.scala.version}</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

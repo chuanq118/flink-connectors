@@ -1,7 +1,8 @@
 {
   "source": {
     "name": "Flink-Source-UUID",
-    "type": "java.lang.String",
+    "dataType": "java.lang.String",
+    "sourceFunc": "cn.lqs.flink.connectors.common.util.UuidSource",
     "props": {
       "interval": "2000",
       "max.size": "300"
@@ -16,11 +17,12 @@
     {
       "name": "Flink-SinkTo-Redis",
       "type": "redis",
-      "sink.func": "",
+      "sinkFunc": "",
       "props": {
-        "hostname": "",
-        "port": "",
-        "password": ""
+        "hostname": "localhost",
+        "port": "6379",
+        "password": "",
+        "mapper": "cn.lqs.flink.connectors.common.config.mapper.RedisStringMapper"
       }
     }
   ],

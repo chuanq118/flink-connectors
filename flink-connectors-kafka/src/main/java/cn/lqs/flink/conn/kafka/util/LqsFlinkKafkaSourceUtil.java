@@ -2,8 +2,7 @@ package cn.lqs.flink.conn.kafka.util;
 
 import cn.lqs.flink.conn.kafka.config.KafkaSourceConfigBuilder;
 import cn.lqs.flink.connectors.common.Source;
-import cn.lqs.flink.connectors.common.util.FlinkConnectorConfigs;
-import cn.lqs.flink.connectors.common.util.LqsParameterTools;
+import cn.lqs.flink.connectors.common.SourceBuilder;
 import org.apache.flink.connector.kafka.source.KafkaSource;
 
 /**
@@ -13,11 +12,7 @@ import org.apache.flink.connector.kafka.source.KafkaSource;
 public class LqsFlinkKafkaSourceUtil {
 
     public static <T> KafkaSource<T> createSourceOfKfk(String[] args) {
-        LqsParameterTools.findCfg(args);
-        if (!FlinkConnectorConfigs.hasConfigured()) {
-            throw new IllegalArgumentException("读取配置文件时发生错误!");
-        }
-        Source kafkaSourceCfg = FlinkConnectorConfigs.getConnectorCfg().getSource();
+        Source kafkaSourceCfg = SourceBuilder.getSourceFromConfig(args);
         return KafkaSourceConfigBuilder.<T>buildFromSource(kafkaSourceCfg);
     }
 

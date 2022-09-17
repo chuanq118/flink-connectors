@@ -3,7 +3,7 @@ package cn.lqs.flink.connectors.common.util;
 import cn.lqs.flink.connectors.common.SinksBuilder;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.RestOptions;
-import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 /**
@@ -14,7 +14,7 @@ public class LqsLocalFlinkApplication {
 
     public static StreamExecutionEnvironment env;
 
-    public static StreamExecutionEnvironment run(int port, int parallelism) {
+    public static StreamExecutionEnvironment runLocal(int port, int parallelism) {
         Configuration cfg = new Configuration();
         cfg.setInteger(RestOptions.PORT, 8081);
         env = StreamExecutionEnvironment.createLocalEnvironment(cfg);
@@ -22,7 +22,7 @@ public class LqsLocalFlinkApplication {
         return env;
     }
 
-    public static <T> void doExecute(DataStreamSource<T> ds) throws Exception {
+    public static <T> void doExecute(SingleOutputStreamOperator<T> ds) throws Exception {
         // 自动装配相关 sinks
         SinksBuilder.build(FlinkConnectorConfigs.getConnectorCfg().getSinks(), ds);
 
